@@ -5,10 +5,10 @@ import java.util.List;
 
 public class TicTacToeDataAnalyzer {
 
-    private CsvProcessor csvProcessor = new CsvProcessor("tictactoe-dataset.csv");
+    private CsvProcessor csvProcessor = new CsvProcessor();
 
     public List<List<Integer>> getPositiveOrNegativeDataByClass(int classMark) {
-        List<List<Integer>> rawDataSet = csvProcessor.getEndgameDataSet();
+        List<List<Integer>> rawDataSet = csvProcessor.getEndgameDataSet("tictactoe-dataset.csv");
         List<List<Integer>> resultData = new ArrayList<>();
 
         rawDataSet.forEach(row -> {

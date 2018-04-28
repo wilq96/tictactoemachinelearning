@@ -79,7 +79,7 @@ import java.util.List;
             return readData;
         }
 
-        private List<List<Integer>> getEndgameDataSet() {
+        public List<List<Integer>> getEndgameDataSet() {
             List<List<String>> rawData = getRawCsvData();
             List<List<Integer>> convertedSignsToNumbers = new ArrayList<>();
             List<Integer> temporaryDynamicNumberList = new ArrayList<>();

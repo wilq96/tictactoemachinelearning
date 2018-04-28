@@ -19,18 +19,13 @@ import java.util.List;
         private static final String COMMA_DELIMITER = ",";
         private static final String NEW_LINE_SEPARATOR = "\n";
 
-        private String csvFileName;
-
-        public CsvProcessor(String csvFileName) {
-            this.csvFileName = csvFileName;
-        }
-
-        public void generateCsvFileWithTransformedDataSetToNumbers() {
+        public void generateCsvFileWithTransformedDataSetToNumbers(String inputCsvFilename,
+                                                                   String newCsvFilenameToGenerate) {
             try {
                 FileWriter writer = new FileWriter(
-                        "src/main/resources/tictactoe-transformed-dataset.csv",false);
+                        "src/main/resources/" + newCsvFilenameToGenerate,false);
 
-                for (List<Integer> row : getEndgameDataSet()) {
+                for (List<Integer> row : getEndgameDataSet(inputCsvFilename)) {
                     for (Integer number : row) {
                         writer.append(number.toString());
                         if (row.indexOf(number) < row.size()-1) {
@@ -47,7 +42,29 @@ import java.util.List;
             }
         }
 
-        private List<List<String>> getRawCsvData() {
+        public void generateCsvFileFromList(List<List<Integer>> listToGenerateCsvFrom, String csvFilenameToGenerate) {
+            try {
+                FileWriter writer = new FileWriter(
+                        "src/main/resources/split-dataset-buckets/" + csvFilenameToGenerate,false);
+
+                for (List<Integer> row : listToGenerateCsvFrom) {
+                    for (Integer number : row) {
+                        writer.append(number.toString());
+                        if (row.indexOf(number) < row.size()-1) {
+                            writer.append(COMMA_DELIMITER);
+                        }
+                    }
+                    writer.append(NEW_LINE_SEPARATOR);
+                }
+                writer.flush();
+                writer.close();
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private List<List<String>> getRawCsvData(String csvFileName) {
             BufferedReader br = null;
             String line;
             String cvsSplitBy = ",";
@@ -55,7 +72,7 @@ import java.util.List;
 
             try {
                 br = new BufferedReader(new InputStreamReader(
-                        this.getClass().getResourceAsStream("/" + this.csvFileName)));
+                        this.getClass().getResourceAsStream("/" + csvFileName)));
 
                 while ((line = br.readLine()) != null) {
                     String[] nextRecord = line.split(cvsSplitBy);
@@ -79,8 +96,8 @@ import java.util.List;
             return readData;
         }
 
-        public List<List<Integer>> getEndgameDataSet() {
-            List<List<String>> rawData = getRawCsvData();
+        public List<List<Integer>> getEndgameDataSet(String csvFileName) {
+            List<List<String>> rawData = getRawCsvData(csvFileName);
             List<List<Integer>> convertedSignsToNumbers = new ArrayList<>();
             List<Integer> temporaryDynamicNumberList = new ArrayList<>();
 

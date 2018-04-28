@@ -24,22 +24,26 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
         private static final int CLASSES_COUNT = 2;
         private static final int FEATURES_COUNT = 9;
+        private static final String INPUT_CSV_FILENAME = "tictactoe-dataset.csv";
+        private static final String NEW_CSV_FILENAME_TO_GENERATE = "tictactoe-transformed-dataset.csv";
 
         public static void main(String[] args) throws  Exception {
 
-            CsvProcessor csvProcessor = new CsvProcessor("tictactoe-dataset.csv");
-            csvProcessor.generateCsvFileWithTransformedDataSetToNumbers();
+            CsvProcessor csvProcessor = new CsvProcessor();
+            csvProcessor.generateCsvFileWithTransformedDataSetToNumbers(INPUT_CSV_FILENAME, NEW_CSV_FILENAME_TO_GENERATE);
 
             DataSet allData;
             try (RecordReader recordReader = new CSVRecordReader(0, ',')) {
                 recordReader.initialize(
                         new FileSplit(
-                        new ClassPathResource("tictactoe-transformed-dataset.csv").getFile()));
+                        new ClassPathResource(NEW_CSV_FILENAME_TO_GENERATE).getFile()));
 
                 DataSetIterator iterator = new RecordReaderDataSetIterator(
                         recordReader, 958, FEATURES_COUNT, CLASSES_COUNT);
                 allData = iterator.next();
             }
+
+            System.out.println("Building data model...");
 
             allData.shuffle(42);
 

@@ -20,7 +20,7 @@ import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.NormalizerStandardize;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-    public class MainFullDataSetTransformationWithoutSplit {
+    public class MainDataSetTransformationWithoutSplit {
 
         private static final int CLASSES_COUNT = 2;
         private static final int FEATURES_COUNT = 9;

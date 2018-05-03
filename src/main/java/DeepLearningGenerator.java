@@ -68,9 +68,9 @@ public class DeepLearningGenerator {
 
         for (Evaluation evaluation : evaluations) {
             accuracy += evaluation.accuracy();
-            precision += evaluation.accuracy();
-            recall += evaluation.accuracy();
-            f1Score += evaluation.accuracy();
+            precision += evaluation.precision();
+            recall += evaluation.recall();
+            f1Score += evaluation.f1();
         }
         System.out.println("\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("                      ----- RESULTS -----                               ");

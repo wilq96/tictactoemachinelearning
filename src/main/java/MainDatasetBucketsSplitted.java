@@ -145,7 +145,7 @@ public class MainDatasetBucketsSplitted {
 
         MultiLayerConfiguration configuration = new NeuralNetConfiguration.Builder()
                 .iterations(10)
-                .activation(Activation.TANH)
+                .activation(Activation.SIGMOID)
                 .weightInit(WeightInit.XAVIER)
                 .learningRate(0.1)
                 .regularization(true).l2(0.0001)

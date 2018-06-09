@@ -71,6 +71,7 @@ public class DeepLearningGenerator {
             precision += evaluation.precision();
             recall += evaluation.recall();
             f1Score += evaluation.f1();
+            System.out.println(evaluation.confusionToString());
         }
         System.out.println("\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("                      ----- RESULTS -----                               ");
